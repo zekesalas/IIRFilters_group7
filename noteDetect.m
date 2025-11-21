@@ -20,7 +20,9 @@ for note = 0:12
     fpass = [freq - bw/2, freq + bw/2];
 
     % apply BPF
-    filtered_signal = bandpass(signal, fpass, fs);
+    b = [0.00728039, 0.0, -0.00728039] %numerator coefficients
+    a = [ 1.0, -1.92529416, 0.98543922 ]; %
+    freqz(b,a);
 
     % compute energy
     pow = sum(filtered_signal.^2);

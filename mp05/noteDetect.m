@@ -9,7 +9,7 @@ bw = 20;     % small bandwidth
 maxPow = 0;
 maxNote = -1;
 
-% Note01 = 0Hz ??? % Note02 = 430.66Hz % Note03 = 990.53Hz
+% Note02 = 430.66Hz % Note03 = 990.53Hz
 
 for note = 0:12
 
@@ -19,8 +19,11 @@ for note = 0:12
     % bandpass range around that frequency
     fpass = [freq - bw/2, freq + bw/2];
 
-    % apply BPF
-    filtered_signal = bandpass(signal, fpass, fs);
+    % apply BPF %Replace with Bandpass IIR Filter 
+    a = [ 1.0, -1.98529416, 0.98543922 ];
+    b = [ 0.00728039, 0.0, -0.00728039 ];
+    freqz(b,a);
+    filtered_signal = None;
 
     % compute energy
     pow = sum(filtered_signal.^2);
@@ -29,6 +32,6 @@ for note = 0:12
         maxPow = pow;
         maxNote = note;
 
-end
+    end
 
 end
