@@ -35,8 +35,4 @@ function [b,a] = biquad_bandpass(fs, f0, bw)
     % scale numerator so magnitude at w0 is 1 (0 dB)
     scale = 1 / abs(H0);
     b = b * scale;
-
-    figure(2)
-    zplane(b,a);
-    title('Pole-Zero Plot of Bandpass Biquad');
 end

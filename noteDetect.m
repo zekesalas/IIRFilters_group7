@@ -17,12 +17,9 @@ for note = 0:12
     freq = f0 * 2^(note/12);
 
     % bandpass range around that frequency
-    fpass = [freq - bw/2, freq + bw/2];
+    [b,a] = biquad_bandpass(fs,freq,bw);
 
-    % apply BPF
-    b = [0.00728039, 0.0, -0.00728039] %numerator coefficients
-    a = [ 1.0, -1.92529416, 0.98543922 ]; %
-    freqz(b,a);
+    filtered_signal = filter(b,a,signal);
 
     % compute energy
     pow = sum(filtered_signal.^2);
@@ -31,6 +28,6 @@ for note = 0:12
         maxPow = pow;
         maxNote = note;
 
-end
+    end
 
 end
