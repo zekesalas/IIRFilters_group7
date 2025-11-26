@@ -12,14 +12,13 @@
     % zeros: 1/2 +/- isqrt(3)/2, 
     % poles: 0, M=2 
 % 1.6.1.mat pole/zero plot here
-% we can correlate the angle of our zeros to the frequency response by
-% observing the frequency at which our nulls our. From the magnitude
-% response plot of pezdemo, we can see there are nulls at pi/3. This 
-% corresponds to the angle of our zeros from the positive real axis. pi/3
-% (our null normalized frequency) multiplied by our sampling frequency is 
-% equivalent to some frequency w_0 that can be filtered out by H(z). 
-% 
-
+% We can relate the angle of the zeros to the frequency response by 
+% observing the frequencies at which the magnitude response has nulls. In 
+% the pezdemo magnitude plot, we see a null at π/3. This null 
+% corresponds directly to the angle of the zeros measured from the positive
+%  real axis in the z-plane. The normalized null frequency π/3, when 
+% multiplied by the sampling frequency, gives the physical frequency w_0 
+% that is attenuated (filtered out) by H(z).
 
 % 1.6.2 6-point running-sum FIR digital filter
 % H(z) = (1-z^-6)/(1-z^-1)
@@ -28,14 +27,33 @@ roots([1,0,0,0,0, 0,-1])
 roots([1,1,0,0,0, 0,0])
 % b) insert 1.6.2.b here
 
-%  Based on our pole zero plot, we can see that impulse response is all
-%  ones. Our frequency response has a main lobe at f = 0 and smaller side
-% lobes past it. This is chracteristic of a low pass filter. 
+%  Based on our pole zero plot, we can see that impulse response is a 
+% step function. Our frequency response has a main lobe at f = 0 and smaller side
+% lobes past it. This is characteristic of a low pass filter. 
 %
-%
-%
+% c) [pi/3, 2pi/3, pi, -2pi/3,-1pi/3]
+% 
+% d) delta[n]-delta[n-6] is the impulse response of this comb filter.
+% 
+% e) This filter is called a comb filter because it equally spaced null 
+% frequencies and equally spaced passed frequencies. [0, pi/3, 2pi/3, pi,
+% -pi/3, -2pi/3]
+% 
+% f) H(z) = 1-2z^-1+2z^-2-2z^-3+2z^-4-2z^-5+1z^-6. 
+% 
+% g) H(z) from part f is a high-pass filter. 
 
+% 1.7 
+% a) h(n) has finite length M=3, stable, causal. Non linear phase response.
+% passband like magnitude response. passband = [.2527pi rad, .899pi rad]
+% stopband [-0.2552pi, 0.2552pi] 
 
+% b) 
+% Moving from the origin to z = -1/2 increases the bandwidth of the filter
+% then moving from z = -1/2 to -1 increases the filter gain, with a sharp
+% peak at high frequencies. For h(n), between 0 and -1/2 there is stonger 
+% damping. Between -1/2 and -1 there is more oscilitary behaviour. 
 
-
-
+% c)
+% Moving the pole outside the unit circle causes h(n) to increase
+% exponentially. This is characteristic of unstable system behavior. 
