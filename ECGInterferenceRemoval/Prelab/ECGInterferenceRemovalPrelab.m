@@ -75,3 +75,11 @@ roots([1,1,0,0,0, 0,0])
 % Zeros at DC and Nyquist force nulls at ω=0 and ω=π while the nearby pole 
 % pair creates a peak near ω≈±2π/3, so the filter is bandpass.
 
+
+
+%1.9 
+% The new transfer function is H(z) = (1 + z^-1 + z^-2)/(1 + 0.8z^-1 +
+% .64z^-2). The frequency response changes from a all-pass filter to a
+% band-stop filter. 
+
+
