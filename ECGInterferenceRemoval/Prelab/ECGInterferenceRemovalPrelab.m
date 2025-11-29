@@ -57,3 +57,8 @@ roots([1,1,0,0,0, 0,0])
 % c)
 % Moving the pole outside the unit circle causes h(n) to increase
 % exponentially. This is characteristic of unstable system behavior. 
+
+% (d)
+% in general, to ensure stability, poles should be placed inside the unit
+% circle. 
+
