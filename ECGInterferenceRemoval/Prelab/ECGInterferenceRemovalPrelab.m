@@ -68,3 +68,10 @@ roots([1,1,0,0,0, 0,0])
 % frequencies, so the filter is high-pass. Moving the pole from -0.9 toward 
 % +0.9 reduces the high-frequency peak and flattens the mid/high band, but 
 % the response remains high-pass since the DC null is unchanged.
+
+%1.8
+% zeros at z = 1 and z = -1 on the unit circle. The poles are at 
+% z = 0.8*exp(±j*2*pi/3) ≈ -0.4 ± j*0.6928, near the unit circle at angle ±2π/3.
+% Zeros at DC and Nyquist force nulls at ω=0 and ω=π while the nearby pole 
+% pair creates a peak near ω≈±2π/3, so the filter is bandpass.
+
