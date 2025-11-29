@@ -62,3 +62,9 @@ roots([1,1,0,0,0, 0,0])
 % in general, to ensure stability, poles should be placed inside the unit
 % circle. 
 
+% 1.7.1
+% H(z) = (1 - z^-1)/(1 + 0.9 z^-1) has a zero at z = 1 and a pole at z = -0.9.
+% The zero at z = 1 forces a null at DC while the pole near z = -1 boosts high 
+% frequencies, so the filter is high-pass. Moving the pole from -0.9 toward 
+% +0.9 reduces the high-frequency peak and flattens the mid/high band, but 
+% the response remains high-pass since the DC null is unchanged.
