@@ -33,7 +33,7 @@ a = [1      -1.6696   0.9025];   % poles (denominator)
 
 %2.4e
 
-y = filter (b, a, ecgsig)
+y = filter (b, a, ecgsig);
 
 t = (0:length(ecgsig)-1)/fs; %time index
 
