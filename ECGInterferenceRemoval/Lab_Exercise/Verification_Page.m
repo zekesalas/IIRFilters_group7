@@ -63,7 +63,7 @@ Fs = 750;                 % sampling frequency (Hz)
 ECGFFT = fft(ecgsig);
 YFFT   = fft(y);
 
-N = length(ECGFFT);       % assume ecgsig and y have same length
+N = length(ECGFFT);       
 
 % Shift zero frequency to the center (for -Fs/2 ... Fs/2 view)
 ECGFFT = fftshift(ECGFFT);
