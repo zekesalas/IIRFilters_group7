@@ -9,11 +9,21 @@
 %fint = 59.4
 %fs = 750 
 
-%poles: ( +0.8345 , +-0.4540 )
+%2.4(b,c)
+% choose r = 0.95 (typical choice)
+% For F0 = 59.4 Hz and Fs = 750 Hz, w0 = 2*pi*(59.4/750) = 0.1584*pi rad/sample ≈ pi/6.31 rad/sample
+
+% poles: ( +0.8345 , +-0.4540 )
 % zeroes: ( +0.8784 , +-0.4779 )
 
-%2.4(b,c)
+% Design of 2nd-order IIR notch: the interference frequency F0 and sampling
+% rate Fs determine the digital notch frequency w0 = 2*pi*F0/Fs (rad/sample).
+% Complex-conjugate zeros are placed on the unit circle at z = e^{±j*w0} to
+% force a notch at F0, and complex-conjugate poles are placed at z = r*e^{±j*w0}
+% with 0 < r < 1 to control the notch bandwidth while keeping the filter stable.
+
 % see 2.4(b_c).png
+% also see IIRnotchPEZ.png
 
 %2.4d
 % H(z) = (1 - 2*cos(wo)*z^-1 + z^-2)/(1 - 2rcos(wo)*z^-1 + r^2*z^-2)
