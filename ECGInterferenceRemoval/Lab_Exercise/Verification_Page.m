@@ -69,26 +69,42 @@ N = length(ECGFFT);       % assume ecgsig and y have same length
 ECGFFT = fftshift(ECGFFT);
 YFFT   = fftshift(YFFT);
 
-% Frequency axis in Hz (corresponding to fftshifted data)
+% Frequency axis in Hz
 f = (-N/2:N/2-1) * (Fs/N);   % goes from -Fs/2 to Fs/2
 
-figure(2);
+% Convert magnitude to dB (add eps to avoid log of zero)
+ECG_dB = 20*log10(abs(ECGFFT) + eps);
+Y_dB   = 20*log10(abs(YFFT)   + eps);
+
+figure;
+
+% Full spectrum in dB
 subplot(2,1,1);
-plot(f, abs(ECGFFT));
+plot(f, ECG_dB, 'LineWidth', 1); hold on;
+plot(f, Y_dB,   'LineWidth', 1);
 xlabel('Frequency (Hz)');
-ylabel('|X(f)|');
-title('Original ECG Spectrum');
+ylabel('Magnitude (dB)');
+title('Original vs Filtered ECG Spectrum (dB)');
+legend('Original','Filtered');
 grid on;
+
+% Zoom in around the notch region to highlight the interference removal
+notchWidth = 40;  % Hz window around 60 Hz for zoom
+xlim1 = [0 200];  % broad low-frequency region
+xlim2 = [40 80];  % tight zoom around 60 Hz
 
 subplot(2,1,2);
-plot(f, abs(YFFT));
+plot(f, ECG_dB, 'LineWidth', 1); hold on;
+plot(f, Y_dB,   'LineWidth', 1);
 xlabel('Frequency (Hz)');
-ylabel('|Y(f)|');
-title('Filtered ECG Spectrum');
+ylabel('Magnitude (dB)');
+title('Zoom Around 60 Hz Region');
+xlim(xlim2);      % focus around the interference frequency
+legend('Original','Filtered');
 grid on;
 
-% The magnitude spectrum of the original ECG (top plot) shows a narrow peak near 59.4 Hz,
-% corresponding to the sinusoidal interference. In the filtered ECG spectrum (bottom plot),
-% this peak is greatly reduced while the rest of the spectrum remains largely unchanged,
-% indicating that the notch filter has effectively removed the 59.4 Hz interference without
-% significantly altering the underlying signal.
+% Using a dB (log-magnitude) spectrum makes it easier to see that,
+% near 59.4 Hz the filtered spectrum is strongly attenuated relative
+% to the original, while at other frequencies the two spectra nearly
+% overlap. This indicates that the notch filter suppresses the narrowband
+% 59.4 Hz interference while largely preserving the rest of the ECG spectrum.
