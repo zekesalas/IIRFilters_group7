@@ -6,8 +6,6 @@
 
 %2.4a
 [ecgsig, fs, fint] = ECGmake('gburdell7');
-%fint = 59.4
-%fs = 750 
 
 %poles: ( +0.8345 , +-0.4540 )
 % zeroes: ( +0.8784 , +-0.4779 )
@@ -17,18 +15,22 @@
 
 %2.4d
 % H(z) = (1 - 2*cos(wo)*z^-1 + z^-2)/(1 - 2rcos(wo)*z^-1 + r^2*z^-2)
-% b0 = 1
-% b1 = -1.7574
-% b2 = 1
-% 
-% a0 = 1 
-% a1 = -1.6696
-% a2 = .9025
+% Define the frequency of interest for the notch filter
+wo = 2 * pi * fint / fs; 
+r = 0.95;
+
+
+b0 = 1;
+b1 = 2*cos(wo);
+b2 = 1;
+
+a0 = 1 ;
+a1 = 2*r*cos(wo);
+a2 = r^2; 
 %
 % y[n] = 1.67*y[n-1] - 0.902*y[n-2] +x[n] - 1.76x[n-1] + x[n-2]
-
-b = [1      -1.7574   1];        % zeros (numerator)
-a = [1      -1.6696   0.9025];   % poles (denominator)
+b = [b0      -b1   b2];       % zeros (numerator)
+a = [a0      -a1   a2];   % poles (denominator)
 
 
 %2.4e
