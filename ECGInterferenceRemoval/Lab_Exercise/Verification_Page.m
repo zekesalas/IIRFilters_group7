@@ -1,11 +1,13 @@
 
 %2.1 
-%H(Z) = 10 * ((1 - 1.1112z^-1 + 1.2345z^-2)/(1 - 0.9z^-1 + .81z^-2))\
+%H(Z) = 8.1 * ((1 - 1.1112z^-1 + 1.2345z^-2)/(1 - 0.9z^-1 + .81z^-2))
 
 
 
 %2.4a
 [ecgsig, fs, fint] = ECGmake('gburdell7');
+disp(fs)
+disp(fint)
 
 %2.4(b,c)
 % choose r = 0.95 (typical choice)
@@ -37,6 +39,7 @@ b2 = 1;
 a0 = 1 ;
 a1 = 2*r*cos(wo);
 a2 = r^2; 
+
 %
 % y[n] = 1.67*y[n-1] - 0.902*y[n-2] +x[n] - 1.76x[n-1] + x[n-2]
 b = [b0      -b1   b2];       % zeros (numerator)
@@ -120,3 +123,20 @@ grid on;
 % to the original, while at other frequencies the two spectra nearly
 % overlap. This indicates that the notch filter suppresses the narrowband
 % 59.4 Hz interference while largely preserving the rest of the ECG spectrum.
+
+window   = 1024;
+noverlap = 512;
+nfft     = 1024;
+
+figure;
+subplot(2,1,1);
+spectrogram(ecgsig, window, noverlap, nfft, fs, 'yaxis');
+title('Spectrogram of Original ECG + Interference');
+
+subplot(2,1,2);
+spectrogram(y, window, noverlap, nfft, fs, 'yaxis');
+title('Spectrogram of Filtered ECG');
+
+%In these spectrograms, you can see that the 60Hz noize gets removed and
+%you can better see the ECG signals.There is a clear bright yellow band at
+%60Hz in the first image, which dissapears in the second one. 
